@@ -63,7 +63,7 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
     }
   }
 
-  void _tinhNgay() {
+  void _tinhNgayHocPhi() {
     if (_ngayHetHP == null) {
       _showAlert("Vui lòng chọn ngày hết học phí!");
       return;
@@ -447,16 +447,17 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
                 ),
                 const SizedBox(height: 25),
                 Center(
-                  child: ElevatedButton.icon(
-                    onPressed: _tinhNgay,
-                    icon: const Icon(Icons.calendar_today),
-                    label: const Text("TÍNH NGÀY"),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue[700],
-                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
-                      textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.blue[700]),
+                      padding: MaterialStateProperty.all(
+                        const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      ),
                     ),
+                    onPressed: _tinhNgayHocPhi,
+                    child: const Text("TÍNH NGÀY"),
                   ),
+
                 ),
 
 
