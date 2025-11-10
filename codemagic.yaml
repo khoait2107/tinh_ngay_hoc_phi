@@ -1,0 +1,15 @@
+workflows:
+  ios_build:
+    name: Build iOS app
+    environment:
+      flutter: stable
+      xcode: latest
+    scripts:
+      - name: Clean project
+        script: flutter clean
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build iOS app (no codesign)
+        script: flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/iphoneos/*.ipa
