@@ -45,18 +45,17 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
 
     setState(() {
       _thuList = days;
-      _selectedDays = List.from(days); // chọn mặc định
-      _soBuoiMoi = soBuoiMacDinh;      // ✅ đặt số buổi tương ứng
+      _selectedDays = List.from(days);
+      _soBuoiMoi = soBuoiMacDinh;
     });
   }
-
 
   void _chonNgayHetHP(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _ngayHetHP ?? DateTime.now(),
       firstDate: DateTime(2020),
-      lastDate: DateTime(2030),
+      lastDate: DateTime(2035),
     );
     if (picked != null) {
       setState(() => _ngayHetHP = picked);
@@ -84,7 +83,6 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
       return;
     }
 
-    // ✅ Công thức chuẩn theo bạn:
     int tongSoBuoi = (_soTuan * _soBuoiMoi) + _soBuoiNhap;
 
     if (tongSoBuoi <= 0) {
@@ -127,10 +125,6 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
     });
   }
 
-
-
-
-
   void _showAlert(String msg) {
     showDialog(
       context: context,
@@ -161,7 +155,7 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
           padding: const EdgeInsets.symmetric(vertical: 8),
           margin: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: active ? Colors.blue[700] : Colors.white,
+            color: active ? Colors.blue.shade700 : Colors.white,
             border: Border.all(color: Colors.blue.shade700),
             borderRadius: BorderRadius.circular(10),
           ),
@@ -169,7 +163,7 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
             child: Text(
               label,
               style: TextStyle(
-                color: active ? Colors.white : Colors.blue[700],
+                color: active ? Colors.white : Colors.blue.shade700,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -194,11 +188,9 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
               }
             });
           },
-
-
           child: Container(
             decoration: BoxDecoration(
-              color: active ? Colors.blue[700] : Colors.white,
+              color: active ? Colors.blue.shade700 : Colors.white,
               border: Border.all(color: Colors.blue.shade700),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -207,7 +199,7 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
             child: Text(
               day,
               style: TextStyle(
-                color: active ? Colors.white : Colors.blue[700],
+                color: active ? Colors.white : Colors.blue.shade700,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -223,7 +215,7 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
       backgroundColor: const Color(0xfff0f4ff),
       appBar: AppBar(
         title: const Text("TÍNH HỌC PHÍ"),
-        backgroundColor: Colors.blue[700],
+        backgroundColor: Colors.blue.shade700,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -236,18 +228,17 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // --- THÔNG TIN HIỆN TẠI ---
                 Text("📘 THÔNG TIN HIỆN TẠI",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue[800],
+                        color: Colors.blue.shade800,
                         fontSize: 16)),
                 const SizedBox(height: 10),
                 Row(
                   children: [
                     const Text("Ca học: ",
-                        style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 14)),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Row(
@@ -261,95 +252,45 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
                   ],
                 ),
                 const SizedBox(height: 12),
-                Text(
-                  "Số buổi học trong tuần:",
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () => setState(() => _soBuoiMoi = 1),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          decoration: BoxDecoration(
-                            color: _soBuoiMoi == 1 ? Colors.blue[700] : Colors.white,
-                            border: Border.all(color: Colors.blue.shade700),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "1 buổi",
-                              style: TextStyle(
-                                color: _soBuoiMoi == 1
-                                    ? Colors.white
-                                    : Colors.blue[700],
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () => setState(() => _soBuoiMoi = 2),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          decoration: BoxDecoration(
-                            color: _soBuoiMoi == 2 ? Colors.blue[700] : Colors.white,
-                            border: Border.all(color: Colors.blue.shade700),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "2 buổi",
-                              style: TextStyle(
-                                color: _soBuoiMoi == 2
-                                    ? Colors.white
-                                    : Colors.blue[700],
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () => setState(() => _soBuoiMoi = 3),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          decoration: BoxDecoration(
-                            color: _soBuoiMoi == 3 ? Colors.blue[700] : Colors.white,
-                            border: Border.all(color: Colors.blue.shade700),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "3 buổi",
-                              style: TextStyle(
-                                color: _soBuoiMoi == 3
-                                    ? Colors.white
-                                    : Colors.blue[700],
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 12),
-                Text("Ngày hết học phí:",
+                Text("Số buổi học trong tuần:",
                     style: const TextStyle(
                         fontWeight: FontWeight.w600, fontSize: 14)),
+                const SizedBox(height: 6),
+                Row(
+                  children: [1, 2, 3].map((soBuoi) {
+                    return Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _soBuoiMoi = soBuoi),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          decoration: BoxDecoration(
+                            color: _soBuoiMoi == soBuoi
+                                ? Colors.blue.shade700
+                                : Colors.white,
+                            border: Border.all(color: Colors.blue.shade700),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "$soBuoi buổi",
+                              style: TextStyle(
+                                color: _soBuoiMoi == soBuoi
+                                    ? Colors.white
+                                    : Colors.blue.shade700,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 12),
+                const Text("Ngày hết học phí:",
+                    style:
+                    TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
                 const SizedBox(height: 5),
                 Row(
                   children: [
@@ -363,22 +304,23 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
                     ),
                     ElevatedButton(
                       onPressed: () => _chonNgayHetHP(context),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue.shade700,
+                      ),
                       child: const Text("Chọn ngày"),
                     ),
                   ],
                 ),
                 const SizedBox(height: 15),
-                Text("Chọn buổi học trong tuần:",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 14)),
+                const Text("Chọn buổi học trong tuần:",
+                    style:
+                    TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
                 _buildCheckboxDays(),
-
                 const SizedBox(height: 20),
-                // --- THÔNG TIN HỌC PHÍ MỚI ---
                 Text("📘 THÔNG TIN HỌC PHÍ MỚI",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue[800],
+                        color: Colors.blue.shade800,
                         fontSize: 16)),
                 const SizedBox(height: 10),
                 Row(
@@ -403,7 +345,7 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
                             onChanged: (v) {
                               setState(() {
                                 _soTuan = v!;
-                                if (v > 0) _soBuoiMoi = 0;
+                                if (v > 0) _soBuoiNhap = 0;
                               });
                             },
                           ),
@@ -429,8 +371,8 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
                             keyboardType: TextInputType.number,
                             onChanged: (v) {
                               setState(() {
-                                _soBuoiNhap = int.tryParse(v) ?? 0; // ✅ DÙNG _soBuoiNhap
-                                if (_soBuoiNhap > 0) _soTuan = 0;   // ✅ Reset số tuần khi nhập buổi lẻ
+                                _soBuoiNhap = int.tryParse(v) ?? 0;
+                                if (_soBuoiNhap > 0) _soTuan = 0;
                               });
                             },
                             decoration: const InputDecoration(
@@ -440,7 +382,6 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
                             ),
                           ),
                         ],
-
                       ),
                     ),
                   ],
@@ -448,25 +389,23 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
                 const SizedBox(height: 25),
                 Center(
                   child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blue[700]),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                      ),
-                    ),
                     onPressed: _tinhNgayHocPhi,
-                    child: const Text("TÍNH NGÀY"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue.shade700,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 12),
+                    ),
+                    child: const Text(
+                      "TÍNH NGÀY",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-
                 ),
-
-
                 const SizedBox(height: 25),
-                // --- KẾT QUẢ ---
                 Text("📘 KẾT QUẢ",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue[800],
+                        color: Colors.blue.shade800,
                         fontSize: 16)),
                 const SizedBox(height: 10),
                 Row(
@@ -482,8 +421,7 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
                             decoration: BoxDecoration(
                               color: const Color(0xffe3f2fd),
                               borderRadius: BorderRadius.circular(12),
-                              border:
-                              Border.all(color: const Color(0xffbbdefb)),
+                              border: Border.all(color: const Color(0xffbbdefb)),
                             ),
                             child: Text(
                               _ngayBDMoi,
@@ -508,8 +446,7 @@ class _CapNhatHocPhiPageState extends State<CapNhatHocPhiPage> {
                             decoration: BoxDecoration(
                               color: const Color(0xffe3f2fd),
                               borderRadius: BorderRadius.circular(12),
-                              border:
-                              Border.all(color: const Color(0xffbbdefb)),
+                              border: Border.all(color: const Color(0xffbbdefb)),
                             ),
                             child: Text(
                               _ngayKTMoi,

@@ -14,10 +14,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Cập nhật học phí',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: false, // ✅ rất quan trọng cho Flutter 3.0.5
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: false, // ⚠️ Giữ false nếu bạn muốn giao diện Material2 truyền thống
       ),
-      home: const CapNhatHocPhiPage(), // trang chính
+      home: const CapNhatHocPhiPage(),
     );
   }
 }
